@@ -8,6 +8,10 @@ $White: hsl(0, 0%, 100%);
 $Black: hsl(0, 0%, 0%);
 $standard: 16px;
 
+.page-content {
+  height: 100vh;
+}
+
 @mixin standard-text {
   font-family: "Kumbh Sans", sans-serif;
   font-weight: 400;
@@ -18,10 +22,33 @@ $standard: 16px;
   font-weight: 700;
 }
 
+.nav-content {
+  display: flex;
+  flex-direction: column;
+  margin-left: 13px;
+}
+
+nav {
+  background-color: white;
+  height: 100vh;
+  width: 70vw;
+  box-shadow: 0 0 0 10000px rgba(0, 0, 0, 0.8);
+}
+
+.toClose {
+  width: fit-content;
+  margin: 24px 0 30px 0;
+  z-index: 10;
+}
+
+.content {
+  background-color: $Light-grayish-blue;
+}
+
 .cart,
 .profile {
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
 }
 
 .top-bar {
@@ -29,7 +56,10 @@ $standard: 16px;
 }
 
 h1,
-h2 {
+h2,
+.value,
+.new-price,
+.discount {
   @include bold-text();
 }
 
@@ -66,4 +96,28 @@ p {
 button {
   border: none;
   background-color: transparent;
+}
+
+.discount {
+  background-color: $Pale-orange;
+  color: $orange;
+  width: 50px;
+  border-radius: 10px;
+}
+
+.old-price {
+  @include standard-text();
+  color: $Dark-grayish-blue;
+}
+
+.add-to-cart {
+  background-color: $orange;
+  color: white;
+  width: 100%;
+  margin-bottom: 20%;
+  border-radius: 10px;
+}
+
+.cart-2 {
+  filter: brightness(0) invert(1);
 }
