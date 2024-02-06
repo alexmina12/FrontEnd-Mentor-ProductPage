@@ -59,15 +59,17 @@ function App() {
 
   return (
     <>
-      <div className="page-content">
-        <div className="top-bar d-flex justify-content-between mb-2">
-          <div className="d-flex menu">
-            <button className="btn" onClick={toggleMenu}>
+      <div className="page-content container">
+        <div className="top-bar d-flex justify-content-between mb-2 row">
+          <div className="d-flex menu col m-0 p-0">
+            <button className="menu" onClick={toggleMenu}>
               <img src={toOpen} />
             </button>
             <nav
               className={`${
-                menuOpen === true ? "position-absolute nav" : "visually-hidden"
+                menuOpen === true
+                  ? "position-absolute nav w-25"
+                  : "visually-hidden"
               }`}
             >
               <div className="nav-content fw-bold">
@@ -91,8 +93,7 @@ function App() {
             </nav>
             <h1 className="my-auto">sneakers</h1>
           </div>
-
-          <div className="d-flex">
+          <div className="d-flex col justify-content-end">
             <div className="my-auto">
               <p
                 className={`d-flex justify-content-end add ${
@@ -102,12 +103,12 @@ function App() {
                 {add}
               </p>
               <img
-                className="cart my-auto"
+                className="cart my-auto d-flex mx-5"
                 src={cart}
                 onClick={getBasket}
               ></img>
             </div>
-            <img className="profile my-auto mx-4" src={profile} />
+            <img className="profile my-auto" src={profile} />
           </div>
         </div>
         {basket && (
@@ -145,57 +146,68 @@ function App() {
             </div>
           </>
         )}
-        <div>
-          <div className="position-absolute slider">
-            <button onClick={prevImg}>
-              <img src={previous} className="d-flex" />
-            </button>
-            <button onClick={nextImg}>
-              <img src={next} className="d-flex" />
-            </button>
+        <div className="top-line"></div>
+        <div className="row main-content">
+          <div className="col-md-6">
+            <div className="position-absolute slider col">
+              <button onClick={prevImg}>
+                <img src={previous} className="d-flex" />
+              </button>
+              <button onClick={nextImg}>
+                <img src={next} className="d-flex" />
+              </button>
+            </div>
+            <img
+              src={setImage()}
+              className="products position-relative d-flex mx-auto"
+            />
           </div>
-          <img src={setImage()} className="products position-relative" />
-        </div>
-        <div className="content mx-4">
-          <p className="subtitle mt-4">SNEAKER COMPANY</p>
-          <h1 className="my-3">Fall Limited Edition Sneakers</h1>
-          <p className="description">
-            These low-profile sneakers are your perfect casual wear companion.
-            Featuring a durable rubber outer sole, they'll withstand everything
-            the weather can offer.
-          </p>
-          <div className="container">
-            <div className="row my-4">
-              <p className="col p-0 new-price fs-1 my-auto">$125.00</p>
-              <div className="col my-auto">
-                {" "}
-                <p className="p-0 discount text-center fs-5 fw-semibold my-auto">
-                  50%
-                </p>
+          <div className="content col-md-6 col-sm-12 right-part">
+            <p className="subtitle mt-4">SNEAKER COMPANY</p>
+            <h1 className="my-3">Fall Limited Edition Sneakers</h1>
+            <p className="description">
+              These low-profile sneakers are your perfect casual wear companion.
+              Featuring a durable rubber outer sole, they'll withstand
+              everything the weather can offer.
+            </p>
+            <div className="container">
+              <div className="row my-4 w-50">
+                <p className="col p-0 new-price fs-1 my-auto">$125.00</p>
+                <div className="col my-auto">
+                  <p className="p-0 discount text-center fs-5 fw-semibold my-auto">
+                    50%
+                  </p>
+                </div>
+                <div className="row-md my-2 d-md-flex justify-content-md-end">
+                  <p className="col d-flex p-0 fs-6 my-auto">
+                    <del>$250.00</del>
+                  </p>
+                </div>
               </div>
-              <p className="col d-flex p-0 justify-content-end old-price fs-6 my-auto">
-                <del>$250.00</del>
-              </p>
+            </div>
+            <div className="container">
+              <div className="row d-flex justify-content-center my-auto">
+                <div className="container counter col-md-3 col-sm-12 my-auto mx-0">
+                  <div className="row ">
+                    <button className="col" onClick={toMinus}>
+                      <img src={minus}></img>
+                    </button>
+                    <div className="value col text-center">{value}</div>
+                    <button className="col" onClick={toPlus}>
+                      <img src={plus}></img>
+                    </button>
+                  </div>
+                </div>
+                <button
+                  className="add-to-cart py-3 mt-sm-4 mt-md-0 d-flex justify-content-center align-middle col-md-6 col-sm-12 my-auto"
+                  onClick={() => addInCart(add)}
+                >
+                  <img src={cart} className="cart-2" />
+                  <p className="mx-2 my-auto">Add to cart</p>
+                </button>
+              </div>
             </div>
           </div>
-          <div className="container big-button">
-            <div className="row">
-              <button className="col" onClick={toMinus}>
-                <img src={minus}></img>
-              </button>
-              <div className="value col text-center">{value}</div>
-              <button className="col" onClick={toPlus}>
-                <img src={plus}></img>
-              </button>
-            </div>
-          </div>
-          <button
-            className="add-to-cart py-3 mt-4 d-flex justify-content-center align-middle"
-            onClick={() => addInCart(add)}
-          >
-            <img src={cart} className="cart-2" />
-            <p className="mx-2 my-auto">Add to cart</p>
-          </button>
         </div>
       </div>
     </>

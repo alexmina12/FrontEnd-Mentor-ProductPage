@@ -44,7 +44,6 @@ a p {
 nav {
   background-color: white;
   height: 100vh;
-  width: 70vw;
   box-shadow: 0 0 0 10000px rgba(0, 0, 0, 0.8);
   z-index: 10;
 }
@@ -55,10 +54,6 @@ nav {
   z-index: 10;
 }
 
-.content {
-  background-color: $Light-grayish-blue;
-}
-
 .cart,
 .profile {
   width: 24px;
@@ -67,6 +62,7 @@ nav {
 
 .top-bar {
   height: 60px;
+  margin: 30px 0;
 }
 
 h1,
@@ -90,6 +86,7 @@ p {
 }
 
 .products {
+  max-width: 350px;
   width: 100%;
   height: 350px;
 }
@@ -103,8 +100,18 @@ p {
   color: $Dark-grayish-blue;
 }
 
-.big-button {
+.counter {
   background-color: $Light-grayish-blue;
+}
+
+.main-content {
+  display: flex;
+  align-items: center;
+  height: 70vh;
+}
+
+.right-part {
+  max-width: 480px;
 }
 
 button {
@@ -140,7 +147,7 @@ button {
 .add-to-cart {
   background-color: $orange;
   color: white;
-  width: 100%;
+  // width: 100%;
   margin-bottom: 20%;
   border-radius: 10px;
 }
@@ -164,10 +171,17 @@ h2 {
 
 .line {
   position: absolute;
-  background-color: gray;
+  background-color: $Grayish-blue;
   width: 100%;
   height: 1px;
   left: 0;
+}
+
+.top-line {
+  background-color: $Grayish-blue;
+  height: 1px;
+  margin-top: 30px;
+  margin-bottom: 50px;
 }
 
 .cart-img {
@@ -219,4 +233,38 @@ span {
   width: 12px;
   height: 17px;
   z-index: 1;
+}
+
+.menu {
+  margin-right: 10px;
+}
+
+@media (min-width: 768px) {
+  .products {
+    border-radius: 20px;
+  }
+  .counter {
+    width: 30%;
+  }
+  .add-to-cart {
+    width: 70%;
+  }
+  .slider img,
+  .slider {
+    width: 0;
+    height: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .top-line {
+    visibility: hidden;
+    margin: 0;
+  }
+  .top-bar {
+    margin: 0;
+  }
+  .right-part {
+    background-color: $Light-grayish-blue;
+  }
 }
