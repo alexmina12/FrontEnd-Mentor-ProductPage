@@ -29,8 +29,13 @@ $standard: 16px;
 }
 
 a p {
-  color: $Black;
+  color: $Grayish-blue;
   font-weight: bold;
+  margin: 0;
+}
+
+a p:hover {
+  color: $Black;
 }
 
 .btn {
@@ -38,26 +43,60 @@ a p {
 }
 
 .nav {
-  margin-left: 0px;
-}
-
-nav {
+  left: 0;
   background-color: white;
   height: 100vh;
   box-shadow: 0 0 0 10000px rgba(0, 0, 0, 0.8);
   z-index: 10;
+  width: 250px;
+}
+
+.pc-nav {
+  margin-left: 50px;
+}
+
+.pc-nav-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  width: 80%;
 }
 
 .toClose {
   width: fit-content;
   margin: 24px 0 30px 0;
   z-index: 10;
+  cursor: pointer;
 }
 
-.cart,
 .profile {
-  width: 24px;
-  height: 24px;
+  width: 34px;
+  height: 34px;
+}
+
+.profile:hover {
+  border-radius: 50px;
+  outline: 2px solid $orange;
+  cursor: pointer;
+}
+
+.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: $Grayish-blue;
+}
+
+.cart {
+  width: 23px;
+  height: 23px;
+}
+
+.cart:hover {
+  cursor: pointer;
 }
 
 .top-bar {
@@ -110,6 +149,22 @@ p {
   height: 70vh;
 }
 
+.photos {
+  margin-top: 30px;
+  gap: 20px;
+}
+
+.photos img {
+  width: 70px;
+  height: 70px;
+  border-radius: 20px;
+}
+
+.photos img:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
 .right-part {
   max-width: 480px;
 }
@@ -131,16 +186,21 @@ button {
   color: $Dark-grayish-blue;
 }
 
+.cart-top {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
 .add {
+  position: relative;
+  top: 0px;
+  right: 30px;
+  color: $White;
   background-color: $orange;
-  position: absolute;
-  top: 12px;
-  right: 66px;
-  padding: 0 5px;
   border-radius: 30px;
   font-size: 12px;
+  padding: 0 5px;
   height: 18px;
-  color: $White;
   width: 20px;
 }
 
@@ -152,17 +212,25 @@ button {
   border-radius: 10px;
 }
 
+.add-to-cart:hover {
+  opacity: 0.5;
+}
+
 .cart-2 {
   filter: brightness(0) invert(1);
 }
 
-.basket {
+.basket-content {
+  position: relative;
   background-color: $White;
   width: 388px;
   height: 310px;
   margin-right: 20px;
   margin-top: 10px;
   z-index: 10;
+  -webkit-box-shadow: 0px 6px 15px -5px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 6px 15px -5px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 6px 15px -5px rgba(0, 0, 0, 0.75);
 }
 
 h2 {
@@ -214,29 +282,51 @@ span {
 }
 
 .slider {
-  width: 90%;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
   display: flex;
   justify-content: space-between;
-  margin: 0 20px;
-  top: 210px;
+  align-items: center;
+  z-index: 5;
 }
 
-.slider button {
+.counter img:hover {
+  opacity: 0.5;
+}
+
+.prev-button,
+.next-button {
+  background: none;
+  border: none;
+  cursor: pointer;
   background-color: white;
-  padding: 14px 15px;
-  border-radius: 60px;
-  justify-content: center;
-  z-index: 1;
+  padding: 10px;
+  border-radius: 50px;
 }
 
-.slider img {
+.prev-button img,
+.next-button img {
   width: 12px;
   height: 17px;
-  z-index: 1;
+}
+
+.prev-button {
+  margin-left: 18%;
+}
+
+.next-button {
+  margin-right: 18%;
 }
 
 .menu {
   margin-right: 10px;
+}
+
+.logo {
+  height: 30px;
 }
 
 @media (min-width: 768px) {
