@@ -15,6 +15,7 @@ import trash from "./assets/images/icon-delete.svg";
 import next from "./assets/images/icon-next.svg";
 import previous from "./assets/images/icon-previous.svg";
 import logo from "./assets/images/logo.svg";
+import close from "./assets/images/icon-close.svg";
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -23,6 +24,20 @@ function App() {
   const [basket, setBasket] = useState(false);
   const [clicked, setClicked] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 767);
+  const [zoomed, setZoomed] = useState(false);
+  const [mainImage, setMainImage] = useState(prod1);
+
+  const handleImageClick = (imageSrc) => {
+    setMainImage(imageSrc);
+  };
+
+  const zoomTrue = () => {
+    setZoomed(true);
+  };
+
+  const zoomFalse = () => {
+    setZoomed(false);
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -40,7 +55,11 @@ function App() {
     const images = [prod1, prod2, prod3, prod4];
     const currentIndex = clicked % images.length;
 
-    return images[currentIndex];
+    if (currentIndex >= 0) {
+      return images[currentIndex];
+    } else {
+      return images[currentIndex * -1];
+    }
   };
 
   const prevImg = () => {
@@ -119,7 +138,7 @@ function App() {
               <>
                 <img src={logo} alt="logo" className="my-auto logo"></img>
                 <nav
-                  className={`${
+                  className={`${zoomed === true && "background-content"} ${
                     menuOpen === true && isMobile
                       ? "position-absolute nav w-25"
                       : "pc-nav col my-auto w-auto text-center"
@@ -153,7 +172,11 @@ function App() {
             )}
           </div>
 
-          <div className="d-flex col-md-3 col justify-content-end">
+          <div
+            className={`d-flex col-md-3 col justify-content-end ${
+              zoomed === true && "background-content"
+            }`}
+          >
             <div className="my-auto cart-top">
               <p
                 className={`d-flex justify-content-end add ${
@@ -227,7 +250,11 @@ function App() {
         <div className="top-line"></div>
         <div className="row main-content">
           <div className="col-md-6 position-relative">
-            <div className="position-absolute slider col">
+            <div
+              className={`position-absolute slider col ${
+                zoomed === true && "visually-hidden"
+              }`}
+            >
               <button onClick={prevImg} className="prev-button">
                 <img src={previous} className="d-flex" />
               </button>
@@ -236,16 +263,77 @@ function App() {
               </button>
             </div>
             <img
-              src={setImage()}
+              src={(setImage(), mainImage)}
               className="products position-relative d-flex mx-auto"
+              onClick={zoomTrue}
             />
+            {zoomed === true && (
+              <>
+                <div className="zoom-content">
+                  <img src={close} onClick={zoomFalse} className="close-icon" />
+                  <img
+                    src={(setImage(), mainImage)}
+                    className={`${
+                      zoomed === true ? "move" : "visually-hidden"
+                    }`}
+                  />
+                  <div className={`position-absolute col zoom-slider`}>
+                    <button onClick={prevImg} className="prev-button">
+                      <img src={previous} className="d-flex" />
+                    </button>
+                    <button onClick={nextImg} className="next-button">
+                      <img src={next} className="d-flex" />
+                    </button>
+                  </div>
+                  <div
+                    className={`photos d-flex justify-content-between mx-auto ${
+                      zoomed && "zoomed"
+                    }`}
+                  >
+                    {" "}
+                    <div>
+                      <div
+                        className="white"
+                        onClick={() => handleImageClick(prod1)}
+                      ></div>
+                      <img src={prod1} />
+                    </div>
+                    <div>
+                      <div
+                        className="white"
+                        onClick={() => handleImageClick(prod2)}
+                      ></div>
+                      <img src={prod2} />
+                    </div>
+                    <div>
+                      <div
+                        className="white"
+                        onClick={() => handleImageClick(prod3)}
+                      ></div>
+                      <img src={prod3} />
+                    </div>
+                    <div>
+                      <div
+                        className="white"
+                        onClick={() => handleImageClick(prod4)}
+                      ></div>
+                      <img src={prod4} />
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
             {!isMobile && (
               <>
-                <div className="photos d-flex justify-content-center">
-                  <img src={prod1} />
-                  <img src={prod2} />
-                  <img src={prod3} />
-                  <img src={prod4} />
+                <div
+                  className={`photos d-flex justify-content-between mx-auto ${
+                    zoomed && "background-content"
+                  }`}
+                >
+                  <img src={prod1} onClick={() => handleImageClick(prod1)} />
+                  <img src={prod2} onClick={() => handleImageClick(prod2)} />
+                  <img src={prod3} onClick={() => handleImageClick(prod3)} />
+                  <img src={prod4} onClick={() => handleImageClick(prod4)} />
                 </div>
               </>
             )}
@@ -287,7 +375,9 @@ function App() {
                   </div>
                 </div>
                 <button
-                  className="add-to-cart py-3 mt-sm-4 mt-md-0 d-flex justify-content-center align-middle col-md-6 col-sm-12 my-auto"
+                  className={`add-to-cart py-3 mt-sm-4 mt-md-0 d-flex justify-content-center align-middle col-md-6 col-sm-12 my-auto mt-4 ${
+                    zoomed === true && "background-content"
+                  }`}
                   onClick={() => {
                     addInCart(add);
                   }}
